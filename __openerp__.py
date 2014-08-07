@@ -1,28 +1,33 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "product_manual_variants",
+    'name': 'product_manual_variants',
 
-    'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+    'summary': '''
+        This addon disables automatic generation of product variants and intrudes a wizard
+        for manual.
+    ''',
 
-    'description': """
-        Long description of module's purpose
-    """,
+    'description': '''
+        Very useful for companies having very big portfolio of products with variants, when not all
+        variants all valid.
+    ''',
 
-    'author': "Your Company",
-    'website': "http://www.yourcompany.com",
+    'author': 'Litex Service Sp. z o.o.',
+    'website': 'http://www.litex.pl',
 
     # Categories can be used to filter modules in modules listing
     # Check <odoo>/addons/base/module/module_data.xml of the full list
-    'category': 'Uncategorized',
-    'version': '0.1',
+    'category': 'Usability',
+    'version': '1.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'website'],
-    'data': ["security/ir.model.access.csv"],
+    'depends': ['base', 'product'],
+    
+    'installable': True,
+    
+    'data': ['security/ir.model.access.csv'],
 
-    'demo': ["data/product_manual_variants_demo.xml"],
+    'demo': ['data/product_manual_variants_demo.xml'],
 
     'tests': [
     ],

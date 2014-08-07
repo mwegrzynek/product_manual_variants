@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
 from openerp.models import Model
-from openerp.fields import Char
 
 
-class product(Model):
-    _name = "product_manual_variants.product"
+class Product(Model):
+    _name = 'product.template'
+    _inherit = 'product.template'
 
-    name = Char()
+    def create_variant_ids(self, cr, uid, ids, context=None):
+        '''
+        Disable automatic variant generation
+        '''
+        return True
+    

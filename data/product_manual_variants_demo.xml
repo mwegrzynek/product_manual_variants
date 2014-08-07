@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        <record id="product_manual_variants.product_demo" model="product">
-            <field name="name">My first record for model 'product_manual_variants.product'</field>
-        </record>
-
     </data>
 </openerp>
