@@ -31,7 +31,7 @@ class TestVariantCreation(common.TransactionCase):
         self.AttributeLine = self.env['product.attribute.line']        
     
     @mute_logger('openerp.addons.base.ir.ir_model', 'openerp.osv.orm')
-    def test_no_variant_gets_created(self):
+    def test_manual_variant_creation(self):
         
         # Create product template
         prd = self.ProductTemplate.create(dict(
@@ -41,16 +41,30 @@ class TestVariantCreation(common.TransactionCase):
         self.assertEqual(prd.product_variant_count, 0)
         
         # Assign attribute lines
-        al = self.AttributeLine.create(dict(
+        al1 = self.AttributeLine.create(dict(
             product_tmpl_id=prd.id,
             attribute_id=self.ref('product.product_attribute_1')
         ))
-        al.value_ids += self.env.ref('product.product_attribute_value_1')
-        al.value_ids += self.env.ref('product.product_attribute_value_2')
+        al1.value_ids += self.env.ref('product.product_attribute_value_1')
+        al1.value_ids += self.env.ref('product.product_attribute_value_2')
         
-        prd.attribute_line_ids += al
+        al2 = self.AttributeLine.create(dict(
+            product_tmpl_id=prd.id,
+            attribute_id=self.ref('product.product_attribute_2')
+        ))
+        al2.value_ids += self.env.ref('product.product_attribute_value_3')
+        al2.value_ids += self.env.ref('product.product_attribute_value_4')
+        
+        prd.attribute_line_ids += al1
+        prd.attribute_line_ids += al2
+        
+        self.env.cr.commit()
         
         # There should be no product variants        
         self.assertEqual(prd.product_variant_count, 0)
+                
+        prd.manually_create_variant_ids([
+            [self.env.ref('product.product_attribute_value_1'), self.env.ref('product.product_attribute_value_1')],
+            [self.env.ref('product.product_attribute_value_4')]
+        ])
         
-        self.env.cr.commit()
