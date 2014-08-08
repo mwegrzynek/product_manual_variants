@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="product_manual_variant_creation_view" model="ir.ui.view">
+            <field name="name">Sale - variant manual creation</field>
+            <field name="model">product.template</field>
+            <field name="mode">primary</field>
+            <field name="priority" eval="5" />
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@string='Variant Prices']" position="after">
+                    <button class="oe_inline oe_stat_button" string="Create Variants"  name="%(manual_variant_action)d" type="action" icon="fa-asterisk"/>
+                </xpath>
+            </field>
+         </record>
+    </data>
+</openerp>

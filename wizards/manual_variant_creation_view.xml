@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="manual_variant_view">
+            <field name="name">Sale - manual product variant </field>
+            <field name="model">product.manual_variant_wizard</field>
+            <field name="priority" eval="10" />
+            <field name="arch" type="xml">
+                <form string="Manual variant creation" version="7.0">
+                    <field name="line_ids" widget="one2many_list">
+                        <tree string="Variants to create" editable="bottom">
+                            <field name="attribute_id" />
+                            <field name="value_ids" widget="many2many_tags" domain="[('attribute_id', '=', attribute_id)]" context="{'default_attribute_id': attribute_id}" />
+                        </tree>
+                    </field>
+	                <footer>
+	                    <button string="Create variants" name="create_variants" type="object" />
+	                    <button string="Cancel" special="cancel" class="oe_link" />
+	                </footer>
+                </form>
+            </field>
+        </record>
+        
+        <act_window id="manual_variant_action"
+            name="Manually create variants"
+            res_model="product.manual_variant_wizard"
+            src_model="product.template"
+            view_type="form"
+            view_mode="form"
+            target="new"
+            />
+        
+    </data>
+</openerp>

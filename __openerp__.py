@@ -25,7 +25,11 @@
     
     'installable': True,
     
-    'data': ['security/ir.model.access.csv'],
+    'data': [
+        'security/ir.model.access.csv',
+        'wizards/manual_variant_creation_view.xml',
+        'models/product_view.xml'
+    ],
 
     'demo': ['data/product_manual_variants_demo.xml'],
 
