@@ -45,26 +45,33 @@ class TestVariantCreation(common.TransactionCase):
             product_tmpl_id=prd.id,
             attribute_id=self.ref('product.product_attribute_1')
         ))
-        al1.value_ids += self.env.ref('product.product_attribute_value_1')
-        al1.value_ids += self.env.ref('product.product_attribute_value_2')
+        al1.value_ids = self.env.ref('product.product_attribute_value_1') + self.env.ref('product.product_attribute_value_2')
         
         al2 = self.AttributeLine.create(dict(
             product_tmpl_id=prd.id,
             attribute_id=self.ref('product.product_attribute_2')
         ))
-        al2.value_ids += self.env.ref('product.product_attribute_value_3')
-        al2.value_ids += self.env.ref('product.product_attribute_value_4')
+        al2.value_ids = self.env.ref('product.product_attribute_value_3') + self.env.ref('product.product_attribute_value_4')
         
-        prd.attribute_line_ids += al1
-        prd.attribute_line_ids += al2
-        
-        self.env.cr.commit()
+        prd.attribute_line_ids = al1 + al2
         
         # There should be no product variants        
         self.assertEqual(prd.product_variant_count, 0)
                 
         prd.manually_create_variant_ids([
-            [self.env.ref('product.product_attribute_value_1'), self.env.ref('product.product_attribute_value_1')],
-            [self.env.ref('product.product_attribute_value_4')]
+            [self.env.ref('product.product_attribute_value_1').id, self.env.ref('product.product_attribute_value_2').id],
+            [self.env.ref('product.product_attribute_value_4').id]
         ])
+        
+        # Now there should be 2 variants
+        self.assertEqual(prd.product_variant_count, 2)
+        
+        # And now, regenerate with one additional attribute 
+        prd.manually_create_variant_ids([
+            [self.env.ref('product.product_attribute_value_1').id, self.env.ref('product.product_attribute_value_2').id],
+            [self.env.ref('product.product_attribute_value_3').id, self.env.ref('product.product_attribute_value_4').id]
+        ])
+        
+        self.assertEqual(prd.product_variant_count, 4)
+        self.env.cr.commit()
         
