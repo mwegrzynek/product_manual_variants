@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'product_manual_variants',
+    'name': 'Product manual variants',
 
     'summary': '''
         This addon disables automatic generation of product variants and intrudes a wizard
