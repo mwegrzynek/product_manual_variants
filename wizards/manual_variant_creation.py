@@ -36,30 +36,28 @@ class ManualVariantWizard(TransientModel):
     _description = 'Manual Variant Creation Wizard'
     _rec_name = 'id'
     
-    @api.multi
-    def _default_line_ids(self):
-        res = []
-        cur_templ = self.env['product.template'].browse(self._context.get('active_id'))
-        
-        if cur_templ:
-            # We were run from product template form, fill the lines
-            for line in cur_templ.attribute_line_ids:
-                res.append(dict(
-                    attribute_id=line.attribute_id.id#,
-                    #value_ids=[val.id for val in line.value_ids]
-                ))
-        return res
+    def _default_product_template_id(self):
+        return self.env['product.template'].browse(self._context.get('active_id'))
     
+    product_template_id = fields.Many2one('product.template', string='Product template', default=_default_product_template_id)
+    line_ids = fields.One2many('product.manual_variant_wizard_line', inverse_name='wizard_id', string='Attribute lines')
     
-    #product_template_id = fields.Many2many('product.template', string='Product template')
-    line_ids = fields.One2many('product.manual_variant_wizard_line', inverse_name='wizard_id', string='Attribute lines', default=_default_line_ids)
+    @api.onchange('product_template_id')
+    def _on_change_product_template_id(self):
+        print "running onchange"
+        for line in self.product_template_id.attribute_line_ids:
+            self.line_ids += self.env['product.manual_variant_wizard_line'].create(dict(
+                wizard_id=self.id,
+                attribute_id=line.attribute_id.id#,
+                #value_ids=[val.id for val in line.value_ids]
+            ))
         
     @api.one
     def create_variants(self):
-        cur_templ = self.env['product.template'].browse(self._context.get('active_id'))
-        
+        cur_templ = self.product_template_id
+        print self.line_ids
         if cur_templ:
             value_lists = [[val.id for val in line.value_ids] for line in self.line_ids]
-            print value_lists
+            print "Value lists: ", value_lists
             cur_templ.manually_create_variant_ids(value_lists)
         return False
