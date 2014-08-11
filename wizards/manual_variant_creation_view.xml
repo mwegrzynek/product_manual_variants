@@ -24,13 +24,29 @@
             </field>
         </record>
         
+        <act_window id="manual_variant_standalone_action"
+            name="Manually create product variants"
+            res_model="product.manual_variant_wizard"
+            view_type="form"
+            view_mode="form"
+            target="new"
+            />
+        
         <act_window id="manual_variant_action"
-            name="Manually create variants"
+            name="Create variants manually"
             res_model="product.manual_variant_wizard"
             src_model="product.template"
             view_type="form"
             view_mode="form"
             target="new"
+            />
+            
+        <menuitem 
+            id="manual_variant_standalone_menu" 
+            name="Create variants manually" 
+            action="manual_variant_standalone_action" 
+            parent="base.menu_product" 
+            sequence="90"
             />
         
     </data>
