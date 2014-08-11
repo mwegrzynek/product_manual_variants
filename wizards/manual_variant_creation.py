@@ -19,7 +19,9 @@
 #
 ################################################################################
 from openerp.models import TransientModel
-from openerp import api, fields
+from openerp.exceptions import Warning
+from openerp import api, fields, _
+
 
 
 class ManualVariantWizardLine(TransientModel):
@@ -28,7 +30,13 @@ class ManualVariantWizardLine(TransientModel):
     
     wizard_id = fields.Many2one('product.manual_variant_wizard', string='Wizard ID')
     attribute_id = fields.Many2one('product.attribute', string='Attribute')
-    value_ids = fields.Many2many('product.attribute.value', relation='manual_variant_wizard_lines_values_rel', column1='line_id', column2='val_id', string='Product Attribute Value')
+    value_ids = fields.Many2many(
+        'product.attribute.value', 
+        relation='manual_variant_wizard_lines_values_rel', 
+        column1='line_id', 
+        column2='val_id', 
+        string='Product Attribute Value'
+    )
     
     
 class ManualVariantWizard(TransientModel):
@@ -48,16 +56,23 @@ class ManualVariantWizard(TransientModel):
         res = []
         for line in self.product_template_id.attribute_line_ids:
             res.append(dict(
-                attribute_id=line.attribute_id.id#,
-                #value_ids=[val.id for val in line.value_ids]
+                attribute_id=line.attribute_id.id
             ))
         self.line_ids = res
-        
+
     @api.one
     def create_variants(self):
         cur_templ = self.product_template_id
         if cur_templ:
+            # Verify, if all attribute values are allowed
+            template_value_ids = {val.id for line in cur_templ.attribute_line_ids for val in line.value_ids}
+            wizard_value_ids = {val.id: val.name for line in self.line_ids for val in line.value_ids}        
+            
+            extra_value_id_names = [wizard_value_ids[val_id] for val_id in set(wizard_value_ids) - set(template_value_ids)]
+            if extra_value_id_names:
+                raise Warning(_('The following attributes are not defined in the template and can not be used:') + '\n' + ','.join(extra_value_id_names))
+            
             value_lists = [[val.id for val in line.value_ids] for line in self.line_ids]
-            print "Value lists: ", value_lists
+            
             cur_templ.manually_create_variant_ids(value_lists)
         return False
