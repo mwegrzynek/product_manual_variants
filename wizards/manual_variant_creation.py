@@ -64,7 +64,7 @@ class ManualVariantWizard(TransientModel):
     def create_variants(self):
         cur_templ = self.product_template_id
         if cur_templ:
-            # Verify, if all attribute values are allowed
+            # Verify, all attribute values are allowed
             template_value_ids = {val.id for line in cur_templ.attribute_line_ids for val in line.value_ids}
             wizard_value_ids = {val.id: val.name for line in self.line_ids for val in line.value_ids}        
             
@@ -75,4 +75,8 @@ class ManualVariantWizard(TransientModel):
             value_lists = [[val.id for val in line.value_ids] for line in self.line_ids]
             
             cur_templ.manually_create_variant_ids(value_lists)
-        return False
+        
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',
+        }
