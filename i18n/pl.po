@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-13 12:01+0000\n"
-"PO-Revision-Date: 2015-02-13 13:09+0100\n"
+"PO-Revision-Date: 2015-02-13 13:18+0100\n"
 "Last-Translator: Michał Węgrzynek <mwegrzynek@litex.pl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -40,7 +40,7 @@ msgstr "Anuluj"
 #. module: product_manual_variants
 #: view:product.template:product_manual_variants.product_manual_variant_creation_view
 msgid "Create Variants"
-msgstr "Create uid"
+msgstr "Twórz Warianty"
 
 #. module: product_manual_variants
 #: view:product.manual_variant_wizard:product_manual_variants.manual_variant_view
