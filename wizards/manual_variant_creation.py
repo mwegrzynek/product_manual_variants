@@ -37,6 +37,13 @@ class ManualVariantWizardLine(TransientModel):
         column2='val_id', 
         string='Product Attribute Value'
     )
+    available_value_ids = fields.Many2many(
+        'product.attribute.value', 
+        relation='manual_variant_wizard_lines_available_values_rel', 
+        column1='wizard_id', 
+        column2='val_id', 
+        string='Available product attribute values'
+    )
     
     
 class ManualVariantWizard(TransientModel):
@@ -47,18 +54,21 @@ class ManualVariantWizard(TransientModel):
     def _default_product_template_id(self):
         return self.env['product.template'].browse(self._context.get('active_id'))
     
-    product_template_id = fields.Many2one('product.template', string='Product template', default=_default_product_template_id, required=True)
+    product_template_id = fields.Many2one('product.template', string='Product template', default=_default_product_template_id, required=True, ondelete='cascade')
     line_ids = fields.One2many('product.manual_variant_wizard_line', inverse_name='wizard_id', string='Attribute lines', required=True)
     
     @api.onchange('product_template_id')
     def _on_change_product_template_id(self):
         # You can not just add ManualVariantWizardLine instances! Instead, return a list of their create dicts
-        res = []
+        attrs = []
+
         for line in self.product_template_id.attribute_line_ids:
-            res.append(dict(
-                attribute_id=line.attribute_id.id
+            attrs.append(dict(
+                attribute_id=line.attribute_id.id,
+                available_value_ids=[(6, 0, line.value_ids.mapped('id'))]
             ))
-        self.line_ids = res
+           
+        self.line_ids = attrs
 
     @api.one
     def create_variants(self):

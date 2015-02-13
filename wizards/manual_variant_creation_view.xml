@@ -13,7 +13,8 @@
                     <field name="line_ids" widget="one2many_list">
                         <tree string="Variants to create" editable="bottom">
                             <field name="attribute_id" />
-                            <field name="value_ids" widget="many2many_tags" domain="[('attribute_id', '=', attribute_id)]" context="{'default_attribute_id': attribute_id}" />
+                            <field name="available_value_ids" invisible="1" />
+                            <field name="value_ids" widget="many2many_tags" options="{'create': false, 'create_edit': false}" domain="[('attribute_id', '=', attribute_id), ('id', 'in', available_value_ids[0][2])]" context="{'default_attribute_id': attribute_id}" />
                         </tree>
                     </field>
 	                <footer>

@@ -18,10 +18,10 @@
     # Categories can be used to filter modules in modules listing
     # Check <odoo>/addons/base/module/module_data.xml of the full list
     'category': 'Usability',
-    'version': '1.0.1',
+    'version': '1.0.3',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'product'],
+    'depends': ['base', 'product', 'web_m2x_options'],
     
     'installable': True,
     
