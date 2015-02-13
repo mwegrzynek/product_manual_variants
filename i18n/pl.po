@@ -1,0 +1,135 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_manual_variants
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-13 12:01+0000\n"
+"PO-Revision-Date: 2015-02-13 13:09+0100\n"
+"Last-Translator: Michał Węgrzynek <mwegrzynek@litex.pl>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: pl\n"
+"X-Generator: Poedit 1.7.4\n"
+
+#. module: product_manual_variants
+#: field:product.manual_variant_wizard_line,attribute_id:0
+msgid "Attribute"
+msgstr "Atrybut"
+
+#. module: product_manual_variants
+#: field:product.manual_variant_wizard,line_ids:0
+msgid "Attribute lines"
+msgstr "Linie atrybutów"
+
+#. module: product_manual_variants
+#: field:product.manual_variant_wizard_line,available_value_ids:0
+msgid "Available product attribute values"
+msgstr "Dostępne wartości atrybutów produktu"
+
+#. module: product_manual_variants
+#: view:product.manual_variant_wizard:product_manual_variants.manual_variant_view
+msgid "Cancel"
+msgstr "Anuluj"
+
+#. module: product_manual_variants
+#: view:product.template:product_manual_variants.product_manual_variant_creation_view
+msgid "Create Variants"
+msgstr "Create uid"
+
+#. module: product_manual_variants
+#: view:product.manual_variant_wizard:product_manual_variants.manual_variant_view
+msgid "Create variants"
+msgstr "Twórz warianty"
+
+#. module: product_manual_variants
+#: model:ir.actions.act_window,name:product_manual_variants.manual_variant_action
+#: model:ir.ui.menu,name:product_manual_variants.manual_variant_standalone_menu
+msgid "Create variants manually"
+msgstr "Twórz warianty ręcznie"
+
+#. module: product_manual_variants
+#: field:product.manual_variant_wizard,create_uid:0
+#: field:product.manual_variant_wizard_line,create_uid:0
+msgid "Created by"
+msgstr "Utworzone przez"
+
+#. module: product_manual_variants
+#: field:product.manual_variant_wizard,create_date:0
+#: field:product.manual_variant_wizard_line,create_date:0
+msgid "Created on"
+msgstr "Utworzone"
+
+#. module: product_manual_variants
+#: field:product.manual_variant_wizard,id:0
+#: field:product.manual_variant_wizard_line,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: product_manual_variants
+#: field:product.manual_variant_wizard,write_uid:0
+#: field:product.manual_variant_wizard_line,write_uid:0
+msgid "Last Updated by"
+msgstr "Uaktualnione przez"
+
+#. module: product_manual_variants
+#: field:product.manual_variant_wizard,write_date:0
+#: field:product.manual_variant_wizard_line,write_date:0
+msgid "Last Updated on"
+msgstr "Uaktualnione"
+
+#. module: product_manual_variants
+#: model:ir.model,name:product_manual_variants.model_product_manual_variant_wizard
+msgid "Manual Variant Creation Wizard"
+msgstr "Kreator Ręcznego Tworzenia Wariantów"
+
+#. module: product_manual_variants
+#: model:ir.model,name:product_manual_variants.model_product_manual_variant_wizard_line
+msgid "Manual Variant Creation Wizard Line"
+msgstr "Linia Kreatora Ręcznego Tworzenia Wariantów"
+
+#. module: product_manual_variants
+#: view:product.manual_variant_wizard:product_manual_variants.manual_variant_view
+msgid "Manual variant creation"
+msgstr "Ręczne tworzenie wariantów"
+
+#. module: product_manual_variants
+#: model:ir.actions.act_window,name:product_manual_variants.manual_variant_standalone_action
+msgid "Manually create product variants"
+msgstr "Twórz warianty produktów ręcznie"
+
+#. module: product_manual_variants
+#: field:product.manual_variant_wizard_line,value_ids:0
+msgid "Product Attribute Value"
+msgstr "Wartość Atrybutu Produktu"
+
+#. module: product_manual_variants
+#: model:ir.model,name:product_manual_variants.model_product_template
+msgid "Product Template"
+msgstr "Szablon Produktu"
+
+#. module: product_manual_variants
+#: field:product.manual_variant_wizard,product_template_id:0
+msgid "Product template"
+msgstr "Szablon produktu"
+
+#. module: product_manual_variants
+#: code:addons/product_manual_variants/wizards/manual_variant_creation.py:83
+#, python-format
+msgid "The following attributes are not defined in the template and can not be used:"
+msgstr "Następujące atrybuty nie są zdefiniowane w szablonie i nie można ich użyć:"
+
+#. module: product_manual_variants
+#: view:product.manual_variant_wizard:product_manual_variants.manual_variant_view
+msgid "Variants to create"
+msgstr "Warianty do utworzenia"
+
+#. module: product_manual_variants
+#: field:product.manual_variant_wizard_line,wizard_id:0
+msgid "Wizard ID"
+msgstr "ID Kreatora"
